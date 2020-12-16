@@ -1,0 +1,49 @@
+var lowercasealphabets=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var Uppercasealphabets=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","W","X","Y","Z"];
+var numbers=["0","1","2","3","4","5","6","7","8","9"];
+var special = [ '!','"', '#','$', '%','&','(',')','*','+','-',"'",'.','/',':',';','<','=','>','?','@','[','\\',']','^','_','`','{','|','}','~']; 
+
+
+
+function generaterandomPassword() {
+    var newCharacterlist=[];
+    var verifyLowerCase=confirm("Would you like to incude Lower Case letters in your password");
+    var verifyUpperCase=confirm("Would you like to include Upper Case letters in your password");
+    var verifyNumbers=confirm("Would you like to include numbers in your password");
+    var verifySpecial=confirm("Would you like to include special characters in your passwords");
+    while (verifyLowerCase == false && verifyUpperCase == false && verifyNumbers == false && verifySpecial == false) {
+        alert("You must pick atleast one type");
+        verifyLowerCase=confirm("Would you like to incude Lower Case letters in your password");
+        verifyUpperCase=confirm("Would you like to include Upper Case letters in your password");
+        verifyNumbers=confirm("Would you like to include numbers in your password");
+        verifySpecial=confirm("Would you like to include special characters in your passwords");
+    }
+
+
+    var choosepasswordLength=parseInt(prompt("Please pick the characters you like and make sure they are between 8 and 128"));
+    while(choosepasswordLength < 8 || choosepasswordLength > 128) {
+        alert("Please choose a number between 8 and 128");
+        choosepasswordLength=parseInt(prompt("Please pick the characters you like and make sure they are between 8 and 128"));
+    } 
+    if (verifyLowerCase){
+        newCharacterlist = newCharacterlist.concat(lowercasealphabets);
+    }
+    if (verifyUpperCase){
+        newCharacterlist = newCharacterlist.concat(Uppercasealphabets);
+    }
+    if (verifyNumbers){
+        newCharacterlist = newCharacterlist.concat(numbers);
+    }
+    if (verifySpecial){
+        newCharacterlist = newCharacterlist.concat(special);
+    }
+    var passwordString=""
+    for (var i = 0; i < choosepasswordLength; i++) {
+        passwordString = passwordString + newCharacterlist[Math.floor(Math.random() * newCharacterlist.length)];
+    }
+    passwordEntry.textContent=passwordString;    
+}
+
+var generateButton= document.getElementById("generate");
+var passwordEntry= document.getElementById("password");
+generateButton.onclick = generaterandomPassword;
